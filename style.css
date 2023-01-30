@@ -1,0 +1,10 @@
+.container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 50px;
+    text-align: center;
+}
+
+.form-group {
+    margin: 20px 0;
+}
