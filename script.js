@@ -1,125 +1,29 @@
-const form = document.getElementById("form");
-const fromSelect = document.getElementById("fromSelect");
-const toSelect = document.getElementById("toSelect");
-const dateInput = document.getElementById("dateInput");
-const busList = document.getElementById("busList");
-const buses = document.getElementById("buses");
+var busList = [{ from: "Cape Town", to: "johannesburg", fare: 200, departure: "12:00 PM" }, { from: "Cape Town", to: "Pretoria", fare: 150, departure: "1:00 PM" }, { from: "johannesburg", to: "Pretoria", fare: 180, departure: "2:00 PM" }, { from: "Pretoria", to: "johannesburg", fare: 220, departure: "3:00 PM" }, { from: "Pretoria", to: "Cape Town", fare: 170, departure: "4:00 PM" }];
 
-const busesData = [
-  {
-    id: 1,
-    from: "A",
-    to: "C",
-    departureTime: "10:00",
-    availableSeats: 20,
-    price: 50,
-  },
-  {
-    id: 2,
-    from: "A",
-    to: "D",
-    departureTime: "12:00",
-    availableSeats: 15,
-    price: 60,
-  },
-  {
-    id: 3,
-    from: "B",
-    to: "C",
-    departureTime: "14:00",
-    availableSeats: 25,
-    price: 70,
-  },
-  {
-    id: 4,
-    from: "B",
-    to: "D",
-    departureTime: "16:00",
-    availableSeats: 30,
-    price: 80,
-  },
-];
+var busReservationForm = document.getElementById("bus-reservation-form");
+var busListDiv = document.getElementById("bus-list");
 
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+busReservationForm.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var fromPlace = document.getElementById("from-place").value;
+    var toPlace = document.getElementById("to-place").value;
 
-  const selectedFrom = fromSelect.value;
-  const selectedTo = toSelect.value;
-  const selectedDate = dateInput.value;
-
-  buses.innerHTML = "";
-
-  // const availableBuses = busesData.filter(
-  //   (bus) => bus.from === selectedFrom && bus.to === selectedTo
-  // );
-
-//   const availableBuses = busesData.filter(
-//     (bus) => bus.from === selectedFrom && bus.to === selectedTo && bus.departureTime.includes(selectedDate)
-// );
-
-const availableBuses = busesData.filter(
-  (bus) => bus.from === selectedFrom && bus.to === selectedTo && bus.departureTime.includes(selectedDate)
-);
-
-  if (availableBuses.length === 0) {
-    alert("No buses available");
-    return;
-  }
-
-  busList.style.display = "block";
-
-  // availableBuses.forEach((bus) => {
-  //   const li = document.createElement("li");
-  //   li.innerHTML = `Bus ${bus.id}: Departs at ${bus.departureTime} with ${bus.availableSeats} available seats. Price: $${bus.price}.`;
-  //   const chooseButton = document.createElement("button");
-  //   chooseButton.innerHTML = "Choose";
-  //   chooseButton.addEventListener("click", () => {
-  //     alert(`You have chosen Bus ${bus.id}. Departs at ${bus.departureTime}. Total price: $${bus.price}.`);
-  //   });
-  //   li.appendChild(chooseButton);
-  //   buses.appendChild(li);
-  // });
-
-  availableBuses.forEach((bus) => {
-    const li = document.createElement("li");
-    li.innerHTML = `Bus ${bus.id} - Departs at ${bus.departureTime} - Seats available: ${bus.seatsAvailable}`;
-  
-    const seatSelector = document.createElement("select");
-for (let i = 1; i <= bus.seatsAvailable; i++) {
-  const option = document.createElement("option");
-  option.value = i;
-  option.text = i;
-  seatSelector.appendChild(option);
-}
-seatSelector.value = 1;
-li.appendChild(seatSelector);
-
-  
-    const price = document.createElement("p");
-    price.innerHTML = `Price per seat: $${bus.price}`;
-    li.appendChild(price);
-  
-    const totalPrice = document.createElement("p");
-    totalPrice.innerHTML = `Total price: $0`;
-    li.appendChild(totalPrice);
-  
-    seatSelector.addEventListener("change", () => {
-      totalPrice.innerHTML = `Total price: $${seatSelector.value * bus.price}`;
+    var filteredBusList = busList.filter(function (bus) {
+        return bus.from === fromPlace && bus.to === toPlace;
     });
-  
-    const chooseButton = document.createElement("button");
-    chooseButton.innerHTML = "Choose this bus";
-    // chooseButton.addEventListener("click", () => {
-    //   alert(`You have chosen Bus ${bus.id} with ${seatSelector.value} seats. Departs at ${bus.departureTime}. Total price: $${seatSelector.value * bus.price}.`);
-    // });
-    chooseButton.addEventListener("click", () => {
-      alert(`You have chosen Bus ${bus.id} with ${seatSelector.value} seats. Departs at ${bus.departureTime}. Total price: $${seatSelector.value * bus.price}.`);
-      const selectedBus = busesData.find((b) => b.id === bus.id);
-      selectedBus.seatsAvailable -= seatSelector.value;
+
+    if (filteredBusList.length === 0) {
+        busListDiv.innerHTML = "No buses available for selected departure place and destination.";
+        return;
+    }
+
+    var busListTable = "<table><tr><th>From</th><th>To</th><th>Fare</th><th>Departure</th><th>Choose</th></tr>";
+
+    filteredBusList.forEach(function (bus) {
+        busListTable += "<tr><td>" + bus.from + "</td><td>" + bus.to + "</td><td>" + bus.fare + "</td><td>" + bus.departure + "</td><td><button>Choose</button></td></tr>";
     });
-    li.appendChild(chooseButton);
-    buses.appendChild(li);
-  });
 
+    busListTable += "</table>";
 
+    busListDiv.innerHTML = busListTable;
 });

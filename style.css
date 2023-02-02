@@ -1,10 +1,35 @@
 .container {
-    width: 50%;
+    width: 500px;
     margin: 0 auto;
-    padding: 50px;
     text-align: center;
-}
-
-.form-group {
-    margin: 20px 0;
-}
+  }
+  
+  #bus-reservation-form label {
+    width: 100px;
+    display: inline-block;
+  }
+  
+  #bus-reservation-form select {
+    width: 200px;
+    height: 25px;
+  }
+  
+  #bus-list {
+    width: 500px;
+    margin: 0 auto;
+    text-align: left;
+  }
+  
+  #bus-list table {
+    border-collapse: collapse;
+  }
+  
+  #bus-list th, td {
+    border: 1px solid black;
+    padding: 5px;
+  }
+  
+  #bus-list th {
+    background-color: lightgray;
+  }
+  

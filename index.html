@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Bus Booking System</title>
+    <title>Bus Reservation</title>
 </head>
-
 <body>
+    <html>
+  <head>
+    <title>Bus Reservation</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
     <div class="container">
-        <h1>Bus Reservation System</h1>
-        <form id="form">
-            <label>
-                From:
-                <select id="fromSelect">
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                </select>
-            </label>
-            <label>
-                To:
-                <select id="toSelect">
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                </select>
-            </label>
-            <label>
-                Date:
-                <input type="date" id="dateInput" />
-            </label>
-            <button type="submit">Check Buses</button>
-        </form>
-
-        <div id="busList" style="display: none;">
-            <h2>Available Buses:</h2>
-            <ul id="buses">
-            </ul>
-        </div>
-
+      <h1>Bus Reservation</h1>
+      <form id="bus-reservation-form">
+        <label for="from-place">From:</label>
+        <select id="from-place" name="from-place">
+          <option value="">Select departure place</option>
+          <option value="Cape Town">Cape Town</option>
+          <option value="johannesburg">johannesburg</option>
+          <option value="Pretoria">Pretoria</option>
+        </select>
+        <br><br>
+        <label for="to-place">To:</label>
+        <select id="to-place" name="to-place">
+          <option value="">Select destination</option>
+          <option value="Cape Town">Cape Town</option>
+          <option value="johannesburg">johannesburg</option>
+          <option value="Pretoria">Pretoria</option>
+        </select>
+        <br><br>
+        <button type="submit">Submit</button>
+      </form>
+      <br><br>
+      <div id="bus-list"></div>
     </div>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+</html>
+
     <script src="./script.js"></script>
 </body>
-
 </html>
